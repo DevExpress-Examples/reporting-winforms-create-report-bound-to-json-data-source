@@ -50,54 +50,19 @@ namespace Create_a_Report_Bound_to_JsonDataSource
         }
         private JsonDataSource CreateDataSourceFromWeb()
         {
-
             var jsonDataSource = new JsonDataSource();
-
             // Specify a Web Service Endpoint URI with JSON content
             var uri = new Uri("http://northwind.servicestack.net/customers.json");
-
-            jsonDataSource.JsonSource = new UriJsonSource(uri) { RootElement = "Customers" };
-
-            //Define the data schema
-            jsonDataSource.Schema = new JsonSchemaNode()
-            {
-                Name = "root",
-                NodeType = JsonNodeType.Object,
-                Selected = true,
-                Nodes = {
-                    new JsonSchemaNode() {
-                        Name = "Customers",
-                        Selected = true,
-                        NodeType = JsonNodeType.Array,
-                        Nodes = {
-                            new JsonSchemaNode() { Name = "Id", NodeType = JsonNodeType.Property, Type = typeof(string), DisplayName = "Customer ID", Selected = true },
-                            new JsonSchemaNode() { Name =  "CompanyName", NodeType = JsonNodeType.Property, Type = typeof(string), Selected = true },
-                            new JsonSchemaNode() { Name = "ContactTitle", NodeType = JsonNodeType.Property, Type = typeof(string), Selected = true },
-                            // The Address field is excluded from the field list
-                            new JsonSchemaNode() { Name = "Address",      NodeType = JsonNodeType.Property, Type = typeof(string), Selected = false }
-                        }
-                    }
-                }
-            };
-
-            //Retrieve data from the JSON data source
-            jsonDataSource.Fill();
+            jsonDataSource.JsonSource = new UriJsonSource(uri);
             return jsonDataSource;
         }
 
         private JsonDataSource CreateDataSourceFromFile()
         {
-
             var jsonDataSource = new JsonDataSource();
-
             //Specify the a JSON file's name
             Uri fileUri = new Uri(@"file:///../../../../customers.txt");
-
             jsonDataSource.JsonSource = new UriJsonSource(fileUri);
-
-            //Retrieve data from the JSON data source
-            jsonDataSource.Fill();
-
             return jsonDataSource;
         }
 
@@ -111,10 +76,6 @@ namespace Create_a_Report_Bound_to_JsonDataSource
 
             // Specify the object that retrieves JSON data
             jsonDataSource.JsonSource = new CustomJsonSource(json);
-
-            //Retrieve data from the JSON data source
-            jsonDataSource.Fill();
-
             return jsonDataSource;
         }
     }
