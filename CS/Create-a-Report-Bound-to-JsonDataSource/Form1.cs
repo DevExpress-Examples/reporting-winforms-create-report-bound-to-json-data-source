@@ -51,9 +51,27 @@ namespace Create_a_Report_Bound_to_JsonDataSource
         private JsonDataSource CreateDataSourceFromWeb()
         {
             var jsonDataSource = new JsonDataSource();
-            // Specify a Web Service Endpoint URI with JSON content
-            var uri = new Uri("http://northwind.servicestack.net/customers.json");
-            jsonDataSource.JsonSource = new UriJsonSource(uri);
+            jsonDataSource.JsonSource = new UriJsonSource(new Uri("http://northwind.servicestack.net/customers.json"));
+            var root = new JsonSchemaNode();
+            root.NodeType = JsonNodeType.Object;
+
+            var customers = new JsonSchemaNode() {NodeType=JsonNodeType.Array, Name="Customers", Selected=true };
+            customers.AddChildren(new[] {
+                new JsonSchemaNode(new JsonNode("CustomerID", true, JsonNodeType.Property, typeof(string))) { DisplayName = "Customer ID" },
+                new JsonSchemaNode() {
+                    Name =  "CompanyName",
+                    Selected = true,
+                    NodeType = JsonNodeType.Property,
+                    Type = typeof(string)
+                },
+                new JsonSchemaNode(new JsonNode("ContactTitle", true, JsonNodeType.Property, typeof(string))),
+                new JsonSchemaNode(new JsonNode("Address", false, JsonNodeType.Property, typeof(string)))
+            });
+
+            root.AddChildren(customers);
+            jsonDataSource.Schema = root;
+            //Retrieve data from the JSON data source
+            jsonDataSource.Fill();
             return jsonDataSource;
         }
 
