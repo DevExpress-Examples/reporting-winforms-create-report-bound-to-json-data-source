@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Create_a_Report_Bound_to_JsonDataSource
 {
@@ -38,30 +39,26 @@ namespace Create_a_Report_Bound_to_JsonDataSource
 
             DetailBand.Controls.Add(XRLabel);
             report.Bands.Add(DetailBand);
-            report.DataSource = CreateDataSource();
+
+
+
+            report.DataSource = CreateDataSourceFromWeb();
+            //report.DataSource = CreateDataSourceFromFile();
+            //report.DataSource = CreateDataSourceFromText();
+            //report.DataMember = "Customers";
             return report;
         }
-        private JsonDataSource CreateDataSource()
+        private JsonDataSource CreateDataSourceFromWeb()
         {
 
             var jsonDataSource = new JsonDataSource();
 
-            // Specify a string with JSON content
-            //string json = "";
-
-            // Specify the a JSON file's name
-            //string filename = "customers.txt";
-
             // Specify a Web Service Endpoint URI with JSON content
             var uri = new Uri("http://northwind.servicestack.net/customers.json");
 
-
-            // Specify the object that retrieves JSON data
-            //jsonDataSource.JsonSource = new CustomJsonSource(json);
-            //jsonDataSource.JsonSource = new UriJsonSource(fileName);
             jsonDataSource.JsonSource = new UriJsonSource(uri) { RootElement = "Customers" };
 
-            // Define the data schema
+            //Define the data schema
             jsonDataSource.Schema = new JsonSchemaNode()
             {
                 Name = "root",
@@ -76,13 +73,47 @@ namespace Create_a_Report_Bound_to_JsonDataSource
                             new JsonSchemaNode() { Name = "Id", NodeType = JsonNodeType.Property, Type = typeof(string), DisplayName = "Customer ID", Selected = true },
                             new JsonSchemaNode() { Name =  "CompanyName", NodeType = JsonNodeType.Property, Type = typeof(string), Selected = true },
                             new JsonSchemaNode() { Name = "ContactTitle", NodeType = JsonNodeType.Property, Type = typeof(string), Selected = true },
+                            // The Address field is excluded from the field list
                             new JsonSchemaNode() { Name = "Address",      NodeType = JsonNodeType.Property, Type = typeof(string), Selected = false }
                         }
                     }
                 }
             };
 
-            // Retrieve data from the JSON data source
+            //Retrieve data from the JSON data source
+            jsonDataSource.Fill();
+            return jsonDataSource;
+        }
+
+        private JsonDataSource CreateDataSourceFromFile()
+        {
+
+            var jsonDataSource = new JsonDataSource();
+
+            //Specify the a JSON file's name
+            string fileName = "customers.txt";
+            Uri fileUri = new Uri(@"file:///../../../../customers.txt");
+
+            jsonDataSource.JsonSource = new UriJsonSource(fileUri);
+
+            //Retrieve data from the JSON data source
+            jsonDataSource.Fill();
+
+            return jsonDataSource;
+        }
+
+        private JsonDataSource CreateDataSourceFromText()
+        {
+
+            var jsonDataSource = new JsonDataSource();
+
+            //Specify a string with JSON content
+            string json = "{\"Customers\":[{\"Id\":\"ALFKI\",\"CompanyName\":\"Alfreds Futterkiste\",\"ContactName\":\"Maria Anders\",\"ContactTitle\":\"Sales Representative\",\"Address\":\"Obere Str. 57\",\"City\":\"Berlin\",\"PostalCode\":\"12209\",\"Country\":\"Germany\",\"Phone\":\"030-0074321\",\"Fax\":\"030-0076545\"}],\"ResponseStatus\":{}}";
+
+            // Specify the object that retrieves JSON data
+            jsonDataSource.JsonSource = new CustomJsonSource(json);
+
+            //Retrieve data from the JSON data source
             jsonDataSource.Fill();
 
             return jsonDataSource;
