@@ -91,7 +91,6 @@ namespace Create_a_Report_Bound_to_JsonDataSource
             var jsonDataSource = new JsonDataSource();
 
             //Specify the a JSON file's name
-            string fileName = "customers.txt";
             Uri fileUri = new Uri(@"file:///../../../../customers.txt");
 
             jsonDataSource.JsonSource = new UriJsonSource(fileUri);
