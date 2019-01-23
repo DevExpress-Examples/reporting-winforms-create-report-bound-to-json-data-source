@@ -47,9 +47,31 @@ Namespace Create_a_Report_Bound_to_JsonDataSource
         End Function
         Private Function CreateDataSourceFromWeb() As JsonDataSource
             Dim jsonDataSource = New JsonDataSource()
-            ' Specify a Web Service Endpoint URI with JSON content
-            Dim uri = New Uri("http://northwind.servicestack.net/customers.json")
-            jsonDataSource.JsonSource = New UriJsonSource(uri)
+            jsonDataSource.JsonSource = New UriJsonSource(New Uri("http://northwind.servicestack.net/customers.json"))
+            Dim root = New JsonSchemaNode()
+            root.NodeType = JsonNodeType.Object
+
+            Dim customers = New JsonSchemaNode() With { _
+                .NodeType=JsonNodeType.Array, _
+                .Name="Customers", _
+                .Selected=True _
+            }
+            customers.AddChildren( { _
+                New JsonSchemaNode(New JsonNode("CustomerID", True, JsonNodeType.Property, GetType(String))) With {.DisplayName = "Customer ID"}, _
+                New JsonSchemaNode() With { _
+                    .Name = "CompanyName", _
+                    .Selected = True, _
+                    .NodeType = JsonNodeType.Property, _
+                    .Type = GetType(String) _
+                }, _
+                New JsonSchemaNode(New JsonNode("ContactTitle", True, JsonNodeType.Property, GetType(String))), _
+                New JsonSchemaNode(New JsonNode("Address", False, JsonNodeType.Property, GetType(String))) _
+            })
+
+            root.AddChildren(customers)
+            jsonDataSource.Schema = root
+            'Retrieve data from the JSON data source
+            jsonDataSource.Fill()
             Return jsonDataSource
         End Function
 
