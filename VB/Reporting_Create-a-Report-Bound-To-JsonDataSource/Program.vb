@@ -13,7 +13,7 @@ Namespace Create_a_Report_Bound_to_JsonDataSource
         ''' <summary>
         ''' The main entry point for the application.
         ''' </summary>
-        <STAThread>
+        <STAThread> _
         Shared Sub Main()
             Application.EnableVisualStyles()
             Application.SetCompatibleTextRenderingDefault(False)

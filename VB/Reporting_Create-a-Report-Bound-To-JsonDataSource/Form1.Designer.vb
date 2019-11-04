@@ -32,8 +32,6 @@
             Me.ClientSize = New System.Drawing.Size(284, 261)
             Me.Name = "Form1"
             Me.Text = "Form1"
-'INSTANT VB NOTE: The following InitializeComponent event wireup was converted to a 'Handles' clause:
-'ORIGINAL LINE: this.Load += new System.EventHandler(this.Form1_Load);
             Me.ResumeLayout(False)
 
         End Sub

@@ -28,20 +28,21 @@ Namespace Create_a_Report_Bound_to_JsonDataSource
         End Sub
         ' ...
         Private Function CreateReport() As XtraReport
-            Dim report As New XtraReport() With {
-                .Bands = {
-                    New DetailBand() With {
-                        .Controls = {
-                            New XRLabel() With {
-                                .ExpressionBindings = { New ExpressionBinding("BeforePrint", "Text", "[CompanyName]") },
-                                .WidthF = 300
-                            }
-                        },
-                        .HeightF = 50
-                    }
-                },
-                .DataSource = CreateDataSourceFromWeb(),
-                .DataMember = "Customers"
+            Dim report As New XtraReport() With { _
+                .Bands = { _
+                    New DetailBand() With { _
+                        .Controls = { _
+                            New XRLabel() With { _
+                                .ExpressionBindings = { New ExpressionBinding("BeforePrint", "Text", "[CompanyName]") }, _
+                                .WidthF = 300 _
+                            } _
+                        }, _
+                        .HeightF = 50 _
+                    } _
+                }, _
+                _
+                .DataSource = CreateDataSourceFromWeb(), _
+                .DataMember = "Customers" _
             }
             Return report
         End Function
@@ -49,25 +50,25 @@ Namespace Create_a_Report_Bound_to_JsonDataSource
         Public Shared Function CreateDataSourceFromWeb() As JsonDataSource
             Dim jsonDataSource = New JsonDataSource()
             ' Specify the data source location
-            jsonDataSource.JsonSource = New UriJsonSource(New Uri("http://northwind.servicestack.net/customers.json"))
+            jsonDataSource.JsonSource = New UriJsonSource(New Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"))
             Dim root = New JsonSchemaNode()
             root.NodeType = JsonNodeType.Object
 
-            Dim customers = New JsonSchemaNode() With {
-                .NodeType=JsonNodeType.Array,
-                .Name="Customers",
-                .Selected=True
+            Dim customers = New JsonSchemaNode() With { _
+                .NodeType=JsonNodeType.Array, _
+                .Name="Customers", _
+                .Selected=True _
             }
-            customers.AddChildren( {
-                New JsonSchemaNode(New JsonNode("CustomerID", True, JsonNodeType.Property, GetType(String))) With {.DisplayName = "Customer ID"},
-                New JsonSchemaNode() With {
-                    .Name = "CompanyName",
-                    .Selected = True,
-                    .NodeType = JsonNodeType.Property,
-                    .Type = GetType(String)
-                },
-                New JsonSchemaNode(New JsonNode("ContactTitle", True, JsonNodeType.Property, GetType(String))),
-                New JsonSchemaNode(New JsonNode("Address", False, JsonNodeType.Property, GetType(String)))
+            customers.AddChildren( { _
+                New JsonSchemaNode(New JsonNode("CustomerID", True, JsonNodeType.Property, GetType(String))) With {.DisplayName = "Customer ID"}, _
+                New JsonSchemaNode() With { _
+                    .Name = "CompanyName", _
+                    .Selected = True, _
+                    .NodeType = JsonNodeType.Property, _
+                    .Type = GetType(String) _
+                }, _
+                New JsonSchemaNode(New JsonNode("ContactTitle", True, JsonNodeType.Property, GetType(String))), _
+                New JsonSchemaNode(New JsonNode("Address", False, JsonNodeType.Property, GetType(String))) _
             })
 
             root.AddChildren(customers)

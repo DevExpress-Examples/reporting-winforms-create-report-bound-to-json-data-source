@@ -55,7 +55,7 @@ namespace Create_a_Report_Bound_to_JsonDataSource
         public static JsonDataSource CreateDataSourceFromWeb() {
             var jsonDataSource = new JsonDataSource();
             // Specify the data source location
-            jsonDataSource.JsonSource = new UriJsonSource(new Uri("http://northwind.servicestack.net/customers.json"));
+            jsonDataSource.JsonSource = new UriJsonSource(new Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"));
             var root = new JsonSchemaNode();
             root.NodeType = JsonNodeType.Object;
 
