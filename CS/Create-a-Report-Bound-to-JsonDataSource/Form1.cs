@@ -45,13 +45,13 @@ namespace Create_a_Report_Bound_to_JsonDataSource
             report.DataSource = CreateDataSourceFromWeb();
             //report.DataSource = CreateDataSourceFromFile();
             //report.DataSource = CreateDataSourceFromText();
-            //report.DataMember = "Customers";
+            report.DataMember = "Customers";
             return report;
         }
         private JsonDataSource CreateDataSourceFromWeb()
         {
             var jsonDataSource = new JsonDataSource();
-            jsonDataSource.JsonSource = new UriJsonSource(new Uri("http://northwind.servicestack.net/customers.json"));
+            jsonDataSource.JsonSource = new UriJsonSource(new Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"));
             var root = new JsonSchemaNode();
             root.NodeType = JsonNodeType.Object;
 
