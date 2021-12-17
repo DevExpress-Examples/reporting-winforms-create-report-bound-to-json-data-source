@@ -53,16 +53,16 @@ namespace Create_a_Report_Bound_to_JsonDataSource
             var jsonDataSource = new JsonDataSource();
             // Specify the endpoint.
             jsonDataSource.JsonSource = new UriJsonSource(
-				new Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"));
+                new Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"));
             var root = new JsonSchemaNode();
             root.NodeType = JsonNodeType.Object;
 
             var customers = new JsonSchemaNode() {NodeType=JsonNodeType.Array, Name="Customers", Selected=true };
             customers.AddChildren(new[] {
                 new JsonSchemaNode(new JsonNode("CustomerID", true,
-				JsonNodeType.Property, typeof(string))) 
-				{ 
-				DisplayName = "Customer ID" },
+                JsonNodeType.Property, typeof(string))) 
+                { 
+                DisplayName = "Customer ID" },
                 new JsonSchemaNode() {
                     Name =  "CompanyName",
                     Selected = true,
@@ -75,8 +75,9 @@ namespace Create_a_Report_Bound_to_JsonDataSource
 
             root.AddChildren(customers);
             jsonDataSource.Schema = root;
-            // Populate the data source with data.
-            jsonDataSource.Fill();
+            // The schema is built, you do not have to call the Fill method to populate the Field List.
+			// The Designer calls the Fill method automatically when a document is generated for preview.
+            // jsonDataSource.Fill();
             return jsonDataSource;
         }
         public static JsonDataSource CreateDataSourceFromFile() {

@@ -46,12 +46,14 @@ Namespace Create_a_Report_Bound_to_JsonDataSource
             Return report
         End Function
 #End Region
-#Region "CreateDataSourceFromWeb"
+#Region "CreateDataSourceFromWeb_start"
         Public Shared Function CreateDataSourceFromWeb() As JsonDataSource
             Dim jsonDataSource = New JsonDataSource()
             ' Specify the endpoint.
             jsonDataSource.JsonSource = New UriJsonSource(
                 New Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"))
+#End Region
+#Region "CreateDataSourceFromWeb_schema"
             Dim root = New JsonSchemaNode()
             root.NodeType = JsonNodeType.Object
 
@@ -69,8 +71,11 @@ Namespace Create_a_Report_Bound_to_JsonDataSource
 
             root.AddChildren(customers)
             jsonDataSource.Schema = root
-            ' Populate the data source with data.
-            jsonDataSource.Fill()
+#End Region
+#Region "CreateDataSourceFromWeb_end"
+			' The schema is built, you do not have to call the Fill method to populate the Field List.
+			' The Designer calls the Fill method automatically when a document is generated for preview.
+            'jsonDataSource.Fill()
             Return jsonDataSource
         End Function
 #End Region
