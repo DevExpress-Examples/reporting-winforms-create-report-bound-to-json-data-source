@@ -73,7 +73,7 @@ Namespace Create_a_Report_Bound_to_JsonDataSource
             jsonDataSource.Schema = root
 #End Region
 #Region "CreateDataSourceFromWeb_end"
-			' The schema is built, you do not have to call the Fill method to populate the Field List.
+            ' The schema is built, you do not have to call the Fill method to populate the Field List.
 			' The Designer calls the Fill method automatically when a document is generated for preview.
             'jsonDataSource.Fill()
             Return jsonDataSource
