@@ -1,5 +1,7 @@
-﻿Namespace Create_a_Report_Bound_to_JsonDataSource
-    Partial Public Class XtraReport1
+Namespace Create_a_Report_Bound_to_JsonDataSource
+
+    Partial Class XtraReport1
+
         ''' <summary>
         ''' Required designer variable.
         ''' </summary>
@@ -10,14 +12,14 @@
         ''' </summary>
         ''' <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            If disposing AndAlso (components IsNot Nothing) Then
-                components.Dispose()
+            If disposing AndAlso (Me.components IsNot Nothing) Then
+                Me.components.Dispose()
             End If
+
             MyBase.Dispose(disposing)
         End Sub
 
-        #Region "Designer generated code"
-
+#Region "Designer generated code"
         ''' <summary>
         ''' Required method for Designer support - do not modify
         ''' the contents of this method with the code editor.
@@ -26,7 +28,7 @@
             Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
             Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
             Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
-            CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType((Me), System.ComponentModel.ISupportInitialize).BeginInit()
             ' 
             ' TopMargin
             ' 
@@ -42,17 +44,17 @@
             ' 
             ' XtraReport1
             ' 
-            Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() { Me.TopMargin, Me.BottomMargin, Me.Detail})
+            Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.TopMargin, Me.BottomMargin, Me.Detail})
             Me.Font = New System.Drawing.Font("Arial", 9.75F)
             Me.Version = "18.2"
-            CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
-
+            CType((Me), System.ComponentModel.ISupportInitialize).EndInit()
         End Sub
 
-        #End Region
-
+#End Region
         Private TopMargin As DevExpress.XtraReports.UI.TopMarginBand
+
         Private BottomMargin As DevExpress.XtraReports.UI.BottomMarginBand
+
         Private Detail As DevExpress.XtraReports.UI.DetailBand
     End Class
 End Namespace

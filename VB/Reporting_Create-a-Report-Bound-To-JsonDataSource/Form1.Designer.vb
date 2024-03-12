@@ -1,5 +1,7 @@
-﻿Namespace Create_a_Report_Bound_to_JsonDataSource
-    Partial Public Class Form1
+Namespace Create_a_Report_Bound_to_JsonDataSource
+
+    Partial Class Form1
+
         ''' <summary>
         ''' Required designer variable.
         ''' </summary>
@@ -10,14 +12,14 @@
         ''' </summary>
         ''' <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            If disposing AndAlso (components IsNot Nothing) Then
-                components.Dispose()
+            If disposing AndAlso (Me.components IsNot Nothing) Then
+                Me.components.Dispose()
             End If
+
             MyBase.Dispose(disposing)
         End Sub
 
-        #Region "Windows Form Designer generated code"
-
+#Region "Windows Form Designer generated code"
         ''' <summary>
         ''' Required method for Designer support - do not modify
         ''' the contents of this method with the code editor.
@@ -32,11 +34,9 @@
             Me.ClientSize = New System.Drawing.Size(284, 261)
             Me.Name = "Form1"
             Me.Text = "Form1"
+            AddHandler Me.Load, New System.EventHandler(AddressOf Me.Form1_Load)
             Me.ResumeLayout(False)
-
         End Sub
-
-        #End Region
+#End Region
     End Class
 End Namespace
-
