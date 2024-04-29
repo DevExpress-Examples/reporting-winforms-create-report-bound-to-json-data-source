@@ -1,5 +1,7 @@
+﻿#region usings
 using DevExpress.DataAccess.Json;
 using DevExpress.XtraReports.UI;
+#endregion
 using System;
 using System.Net;
 using System.Windows.Forms;
@@ -27,6 +29,7 @@ namespace Create_a_Report_Bound_to_JsonDataSource
             designTool.ShowRibbonDesignerDialog();
             Application.Exit();
         }
+        #region CreateReport_start
         private XtraReport CreateReport() {
             XtraReport report = new XtraReport() {
                 Bands = {
@@ -43,17 +46,23 @@ namespace Create_a_Report_Bound_to_JsonDataSource
                     }
                 },
                 DataSource = CreateDataSourceFromWeb(),
+                #endregion
                 //DataSource = CreateDataSourceFromFile(),
                 //DataSource = CreateDataSourceFromText(),
+                #region CreateReport_end
                 DataMember = "Customers"
             };
             return report;
         }
+        #endregion
+        #region CreateDataSourceFromWeb_start
         public static JsonDataSource CreateDataSourceFromWeb() {
             var jsonDataSource = new JsonDataSource();
             // Specify the endpoint.
             jsonDataSource.JsonSource = new UriJsonSource(
                 new Uri("https://raw.githubusercontent.com/DevExpress-Examples/DataSources/master/JSON/customers.json"));
+            #endregion
+            #region CreateDataSourceFromWeb_schema
             var root = new JsonSchemaNode();
             root.NodeType = JsonNodeType.Object;
 
@@ -75,11 +84,15 @@ namespace Create_a_Report_Bound_to_JsonDataSource
 
             root.AddChildren(customers);
             jsonDataSource.Schema = root;
+            #endregion
+            #region CreateDataSourceFromWeb_end
             // The schema is built, you do not have to call the Fill method to populate the Field List.
 			// The Designer calls the Fill method automatically when a document is generated for preview.
             //jsonDataSource.Fill();
             return jsonDataSource;
         }
+        #endregion
+        #region CreateDataSourceFromFile
         public static JsonDataSource CreateDataSourceFromFile() {
             var jsonDataSource = new JsonDataSource();
             // Specify the JSON file name.
@@ -89,6 +102,8 @@ namespace Create_a_Report_Bound_to_JsonDataSource
             jsonDataSource.Fill();
             return jsonDataSource;
         }
+        #endregion
+        #region CreateDataSourceFromText
         public static JsonDataSource CreateDataSourceFromText() {
             var jsonDataSource = new JsonDataSource();
 
@@ -105,5 +120,6 @@ namespace Create_a_Report_Bound_to_JsonDataSource
             jsonDataSource.Fill();
             return jsonDataSource;
         }
+        #endregion
     }
 }
