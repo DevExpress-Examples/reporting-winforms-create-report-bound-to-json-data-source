@@ -24,7 +24,7 @@ This example demonstrates how to use the [JsonDataSource](https://docs.devexpres
 - [How to Provide Authentication to Access Json Data in Reports](https://github.com/DevExpress-Examples/Reporting-Provide-Authentication-to-Access-JSON-Data)
 - [How to Provide Predefined JsonDataSource Header Parameters in Wizards](https://github.com/DevExpress-Examples/Reporting-Provide-Predefined-JsonDataSource-Header-Parameters-In-Wizard)
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=reporting-winforms-create-report-bound-to-json-data-source&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=reporting-winforms-create-report-bound-to-json-data-source&~~~was_helpful=no)
 
